@@ -27,6 +27,15 @@ export class UserService {
     );
   }
 
+  getAnalytics() {
+    return this.analyticsClient.send(
+      {
+        cmd: 'get_analytics',
+      },
+      {},
+    );
+  }
+
   findAll() {
     return `This action returns all user`;
   }

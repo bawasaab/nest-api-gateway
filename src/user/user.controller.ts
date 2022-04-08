@@ -20,6 +20,11 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+  @Get('analytics')
+  getAnalytics() {
+    return this.userService.getAnalytics();
+  }
+
   @Get()
   findAll() {
     return this.userService.findAll();
