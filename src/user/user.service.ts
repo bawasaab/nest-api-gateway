@@ -10,12 +10,18 @@ export class UserService {
 
   constructor(
     @Inject('COMMUNICATION') private readonly communicationClient: ClientProxy,
+    @Inject('ANALYTICS') private readonly analyticsClient: ClientProxy,
   ) {}
 
   create(createUserDto: CreateUserDto) {
     this.users.push(createUserDto);
     console.log('an user_created event emitted from api-gateway');
     this.communicationClient.emit(
+      'user_created',
+      new CreateUserEvent(createUserDto.email),
+    );
+    console.log('an user_created event emitted from api-gateway to analytics');
+    this.analyticsClient.emit(
       'user_created',
       new CreateUserEvent(createUserDto.email),
     );
